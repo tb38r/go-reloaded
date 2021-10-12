@@ -5,9 +5,10 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 )
 
-func readFromFile() {
+func main() {
 
 	file, err := os.Open("test.txt") //os.Open opens file in read only mode
 	if err != nil {
@@ -20,14 +21,10 @@ func readFromFile() {
 	// bufio.Scanner.Split() method.
 
 	Scanner := bufio.NewScanner(file) //creating scanner, scans input from chosen source (file, as declared in lines 11/12)
+	// The bufio.ScanLines is used as an input to the method bufio.Scanner.Split()
 
-	// The bufio.ScanLines is used as an
-	// input to the method bufio.Scanner.Split()
-	// and then the scanning forwards to each
-	// new line using the bufio.Scanner.Scan()
-	// method.
+	Scanner.Split(bufio.ScanLines) // and then the scanning forwards to each new line using the bufio.Scanner.Scan() method
 
-	Scanner.Split(bufio.ScanLines)
 	var text []string
 
 	for Scanner.Scan() {
@@ -38,13 +35,9 @@ func readFromFile() {
 	// on the os.File object to close the file
 	file.Close()
 
-	for i, v := range text {
-		fmt.Println(i, v)
-	}
+	t2 := strings.Join(text, " ")
+	t3 := strings.Split(t2, " ")
 
-}
-
-func main() {
-	readFromFile()
+	fmt.Printf("%v, %T", t3, t3)
 
 }
