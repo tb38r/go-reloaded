@@ -18,6 +18,15 @@ func hexaconvert(n string) string {
 	return fmt.Sprint(num)
 
 }
+func binaryconvert(n string) string {
+
+	num, err := strconv.ParseInt(n, 2, 64)
+	if err != nil {
+		panic(err)
+	}
+	return fmt.Sprint(num)
+
+}
 
 func main() {
 
@@ -54,9 +63,25 @@ func main() {
 	for i := 0; i < len(t3); i++ {
 		if t3[i] == "(hex)" && i > 0 {
 			t3[i-1] = hexaconvert(t3[i-1])
-			fmt.Println(t3)
+			t3 = append(t3[:i], t3[i+1:]...)
+
+		} else if t3[i] == "(bin)" && i > 0 {
+			t3[i-1] = binaryconvert(t3[i-1])
+			t3 = append(t3[:i], t3[i+1:]...)
+
+		} else if t3[i] == "(up)" && i > 0 {
+			t3[i-1] = strings.ToUpper(t3[i-1])
+			t3 = append(t3[:i], t3[i+1:]...)
+
+		} else if t3[i] == "(low)" && i > 0 {
+			t3[i-1] = strings.ToLower(t3[i-1])
+			t3 = append(t3[:i], t3[i+1:]...)
+
+		} else if t3[i] == "(cap)" && i > 0 {
+			t3[i-1] = strings.Title(t3[i-1])
+			t3 = append(t3[:i], t3[i+1:]...)
 		}
 
 	}
-
+	fmt.Println(t3)
 }
