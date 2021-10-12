@@ -9,6 +9,19 @@ import (
 	"strings"
 )
 
+func isvowelh(n []string) bool {
+
+	for i := 0 ; i < len(n) ; i++ {
+		if n[0] == "A" || n[0] == "E" || n[0] == "I" || n[0] == "O" || n[0] == "U" || n[0] == "a" || n[0] == "e" ||
+		n[0] == "i" ||  n[0] == "o" ||  n[0] == "u" ||  n[0] == "h" {
+			return true
+
+			}else{
+				return false
+			}
+				
+}
+
 func hexaconvert(n string) string {
 
 	num, err := strconv.ParseInt(n, 16, 64)
@@ -80,7 +93,13 @@ func main() {
 		} else if t3[i] == "(cap)" && i > 0 {
 			t3[i-1] = strings.Title(t3[i-1])
 			t3 = append(t3[:i], t3[i+1:]...)
+
+		}else if (t3[i] == "a" || t3[i] == "A") && (isvowelh(t3[i+1]) == true) {
+
+
 		}
+
+
 
 	}
 	fmt.Println(t3)
