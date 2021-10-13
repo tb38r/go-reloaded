@@ -9,17 +9,33 @@ import (
 	"strings"
 )
 
-func isvowelh(n []string) bool {
+// func seperator(n string)string{
 
-	for i := 0 ; i < len(n) ; i++ {
-		if n[0] == "A" || n[0] == "E" || n[0] == "I" || n[0] == "O" || n[0] == "U" || n[0] == "a" || n[0] == "e" ||
-		n[0] == "i" ||  n[0] == "o" ||  n[0] == "u" ||  n[0] == "h" {
-			return true
+// 	for i := 0; i < len(n); i++ {
+// 		if (n[i] == '.' || n[i] == ',' || n[i] == '!' || n[i] == '?' || n[i] == ':' || n[i] == ':') && n[i]-1 == ' '{
+// 			if (n[i+1] != '.' || n[i+1] != ',' || n[i+1] !='!' || n[i+1] != '?' || n[i+1] != ':'){
+// 				n[i-1] = n[i]
+// 			}
+// 		}
+// 		return string(i)
+// 	}
 
-			}else{
-				return false
-			}
-				
+func isvowelh(n string) bool {
+
+	var result bool
+
+	for i := 0; i < len(n); i++ {
+		if n[0] == 'A' || n[0] == 'E' || n[0] == 'I' || n[0] == 'O' || n[0] == 'U' || n[0] == 'a' || n[0] == 'e' ||
+			n[0] == 'i' || n[0] == 'o' || n[0] == 'u' || n[0] == 'h' {
+			result = true
+
+		} else {
+			result = false
+		}
+	}
+
+	return result
+
 }
 
 func hexaconvert(n string) string {
@@ -94,13 +110,15 @@ func main() {
 			t3[i-1] = strings.Title(t3[i-1])
 			t3 = append(t3[:i], t3[i+1:]...)
 
-		}else if (t3[i] == "a" || t3[i] == "A") && (isvowelh(t3[i+1]) == true) {
+		} else if (t3[i] == "a") && (isvowelh(t3[i+1]) == true) {
+			t3[i] = "an"
 
+		} else if (t3[i] == "A") && (isvowelh(t3[i+1]) == true) {
+			t3[i] = "An"
 
+		} else if t3[i] == "." || t3[i] == "," || t3[i] == "!" || t3[i] == "?" || t3[i] == ":" || t3[i] == ";" {
+			t3[i-1] += t3[i]
 		}
-
-
-
 	}
-	fmt.Println(t3)
+	fmt.Printf("%#v", t3)
 }
