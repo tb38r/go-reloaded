@@ -141,6 +141,7 @@ func main() {
 				reform := reverse(reversed)
 				rejoined := strings.Join(reform, " ")
 				fmt.Println(rejoined)
+				fmt.Println(strings.TrimLeft(rejoined, "("))
 			}
 		}
 	}
