@@ -9,16 +9,16 @@ import (
 	"strings"
 )
 
-// func seperator(n string)string{
+func reverse(n []string) []string {
 
-// 	for i := 0; i < len(n); i++ {
-// 		if (n[i] == '.' || n[i] == ',' || n[i] == '!' || n[i] == '?' || n[i] == ':' || n[i] == ':') && n[i]-1 == ' '{
-// 			if (n[i+1] != '.' || n[i+1] != ',' || n[i+1] !='!' || n[i+1] != '?' || n[i+1] != ':'){
-// 				n[i-1] = n[i]
-// 			}
-// 		}
-// 		return string(i)
-// 	}
+	reversed := []string{}
+
+	for _, v := range n {
+		reversed = append([]string{v}, reversed...)
+		// result = string(v) + result
+	}
+	return reversed //fmt.Sprint(reserved)
+}
 
 func isvowelh(n string) bool {
 
@@ -87,38 +87,61 @@ func main() {
 	t2 := strings.Join(text, "")
 	t3 := strings.Split(t2, " ")
 
-	// fmt.Printf("%#v %T\n", t3, t3)
-
 	for i := 0; i < len(t3); i++ {
 		if t3[i] == "(hex)" && i > 0 {
 			t3[i-1] = hexaconvert(t3[i-1])
 			t3 = append(t3[:i], t3[i+1:]...)
+			t4 := strings.Join(t3, " ")
+			_ = t4 //omit
 
 		} else if t3[i] == "(bin)" && i > 0 {
 			t3[i-1] = binaryconvert(t3[i-1])
 			t3 = append(t3[:i], t3[i+1:]...)
+			t4 := strings.Join(t3, " ")
+			_ = t4 // omit
 
 		} else if t3[i] == "(up)" && i > 0 {
 			t3[i-1] = strings.ToUpper(t3[i-1])
 			t3 = append(t3[:i], t3[i+1:]...)
+			t4 := strings.Join(t3, " ")
+			_ = t4 // omit
 
 		} else if t3[i] == "(low)" && i > 0 {
 			t3[i-1] = strings.ToLower(t3[i-1])
 			t3 = append(t3[:i], t3[i+1:]...)
+			t4 := strings.Join(t3, " ")
+			_ = t4 //omit
 
 		} else if t3[i] == "(cap)" && i > 0 {
 			t3[i-1] = strings.Title(t3[i-1])
 			t3 = append(t3[:i], t3[i+1:]...)
+			t4 := strings.Join(t3, " ")
+			_ = t4 //omit
 
 		} else if (t3[i] == "a") && (isvowelh(t3[i+1]) == true) {
 			t3[i] = "an"
+			t4 := strings.Join(t3, " ")
+			_ = t4 //omit
 
 		} else if (t3[i] == "A") && (isvowelh(t3[i+1]) == true) {
 			t3[i] = "An"
+			t4 := strings.Join(t3, " ")
+			_ = t4 //omit
 
-		} else if t3[i] == "." || t3[i] == "," || t3[i] == "!" || t3[i] == "?" || t3[i] == ":" || t3[i] == ";" {
-			t3[i-1] += t3[i]
 		}
 	}
-	fmt.Printf("%#v", t3)
+	reversed := reverse(t3)
+	for i := 0; i < len(reversed); i++ {
+		if (reversed[i][0] > '0' && reversed[i][0] <= '9') && reversed[i][len([]rune(reversed[i]))-1] == ')' {
+			n, _ := strconv.Atoi(reversed[i][:1]) //[:1] reads as string , [0] reads as a solitary byte, not wanted
+			if strings.Contains(reversed[i+1], "(up") {
+				for j := 1; j <= n; j++ {
+					reversed[(i+1)+j] = strings.ToUpper(reversed[(i+1)+j])
+				}
+				reform := reverse(reversed)
+				rejoined := strings.Join(reform, " ")
+				fmt.Println(rejoined)
+			}
+		}
+	}
 }
