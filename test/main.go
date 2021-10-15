@@ -9,6 +9,20 @@ import (
 	"strings"
 )
 
+func isPunc(category string) bool {
+	switch category {
+	case
+		".",
+		",",
+		"!",
+		":",
+		";",
+		"?":
+		return true
+	}
+	return false
+}
+
 func removebrackets(n string) string {
 
 	var opening int
@@ -186,8 +200,20 @@ func main() {
 				reform := reverse(reversed)
 				rejoined := strings.Join(reform, " ")
 				final := removebrackets(rejoined)
-				fmt.Println(final)
+				_ = final //to omit
 			}
 		}
 	}
+	srune := []rune(t2)
+	fmt.Printf("%#v\n", t2)
+
+	for i := 0; i < len(srune); i++ {
+		if isPunc(string(srune[i])) && srune[i-1] == ' ' {
+			srune[i], srune[i-1] = srune[i-1], srune[i]
+		}
+	}
+	t2 = string(srune)
+	final := strings.TrimSpace(t2)
+	fmt.Printf("%#v", final)
+
 }
