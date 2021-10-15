@@ -171,6 +171,22 @@ func main() {
 				final := removebrackets(rejoined)
 				fmt.Println(final)
 
+			} else if strings.Contains(reversed[i+1], "(low") {
+				for j := 1; j <= n; j++ {
+					reversed[(i+1)+j] = strings.ToLower(reversed[(i+1)+j])
+				}
+				reform := reverse(reversed)
+				rejoined := strings.Join(reform, " ")
+				final := removebrackets(rejoined)
+				fmt.Println(final)
+			} else if strings.Contains(reversed[i+1], "(cap") {
+				for j := 1; j <= n; j++ {
+					reversed[(i+1)+j] = strings.Title(reversed[(i+1)+j])
+				}
+				reform := reverse(reversed)
+				rejoined := strings.Join(reform, " ")
+				final := removebrackets(rejoined)
+				fmt.Println(final)
 			}
 		}
 	}
