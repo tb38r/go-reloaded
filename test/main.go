@@ -204,16 +204,29 @@ func main() {
 			}
 		}
 	}
+	//PUNCTUATION #1
 	srune := []rune(t2)
-	fmt.Printf("%#v\n", t2)
 
 	for i := 0; i < len(srune); i++ {
 		if isPunc(string(srune[i])) && srune[i-1] == ' ' {
 			srune[i], srune[i-1] = srune[i-1], srune[i]
 		}
 	}
+
+	//PUNCTUATION #2
+
+	for i := 0; i < len(srune); i++ {
+		if srune[len(srune)-1] == 39 && srune[len(srune)-2] == ' ' {
+			srune[len(srune)-2], srune[len(srune)-1] = srune[len(srune)-1], srune[len(srune)-2]
+		} else if srune[i] == 39 && srune[i-1] == ' ' && srune[i+1] == ' ' {
+			srune[i], srune[i+1] = srune[i+1], srune[i]
+		}
+
+	}
 	t2 = string(srune)
-	final := strings.TrimSpace(t2)
+	fmt.Printf("%#v\n", t2)
+	t2unspaced := strings.ReplaceAll(t2, "  ", " ")
+	final := strings.TrimSpace(t2unspaced)
 	fmt.Printf("%#v", final)
 
 }
