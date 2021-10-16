@@ -210,13 +210,7 @@ func main() {
 	for i := 0; i < len(srune); i++ {
 		if isPunc(string(srune[i])) && srune[i-1] == ' ' {
 			srune[i], srune[i-1] = srune[i-1], srune[i]
-		}
-	}
-
-	//PUNCTUATION #2
-
-	for i := 0; i < len(srune); i++ {
-		if srune[len(srune)-1] == 39 && srune[len(srune)-2] == ' ' {
+		} else if srune[len(srune)-1] == 39 && srune[len(srune)-2] == ' ' {
 			srune[len(srune)-2], srune[len(srune)-1] = srune[len(srune)-1], srune[len(srune)-2]
 		} else if srune[i] == 39 && srune[i-1] == ' ' && srune[i+1] == ' ' {
 			srune[i], srune[i+1] = srune[i+1], srune[i]
