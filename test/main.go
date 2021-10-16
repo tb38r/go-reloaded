@@ -172,6 +172,7 @@ func main() {
 
 		}
 	}
+	// (LOW,UP,CAP [NUMBER])
 	reversed := reverse(t3)
 	for i := 0; i < len(reversed); i++ {
 		if (reversed[i][0] > '0' && reversed[i][0] <= '9') && reversed[i][len([]rune(reversed[i]))-1] == ')' {
@@ -204,7 +205,7 @@ func main() {
 			}
 		}
 	}
-	//PUNCTUATION #1
+	//PUNCTUATION
 	srune := []rune(t2)
 
 	for i := 0; i < len(srune); i++ {
