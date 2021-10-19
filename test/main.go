@@ -7,97 +7,8 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"tgr"
 )
-
-func isPunc(category string) bool {
-	switch category {
-	case
-		".",
-		",",
-		"!",
-		":",
-		";",
-		"?":
-		return true
-	}
-	return false
-}
-
-func removebrackets(n string) string {
-
-	var opening int
-	var closing int
-
-	for index, char := range n {
-		if char == '(' {
-			opening = index
-		} else if char == ')' {
-			closing = index + 1
-		}
-	}
-
-	toAdd := closing - opening
-
-	var empty string
-
-	for i := 0; i < len(n); i++ {
-		if i == opening {
-			i += toAdd
-		} else {
-			empty += string(n[i])
-			//empty = append(empty, string(n[i]))
-		}
-	}
-	return empty
-}
-
-func reverse(n []string) []string {
-
-	reversed := []string{}
-
-	for _, v := range n {
-		reversed = append([]string{v}, reversed...)
-		// result = string(v) + result
-	}
-	return reversed //fmt.Sprint(reserved)
-}
-
-func isvowelh(n string) bool {
-
-	var result bool
-
-	for i := 0; i < len(n); i++ {
-		if n[0] == 'A' || n[0] == 'E' || n[0] == 'I' || n[0] == 'O' || n[0] == 'U' || n[0] == 'a' || n[0] == 'e' ||
-			n[0] == 'i' || n[0] == 'o' || n[0] == 'u' || n[0] == 'h' {
-			result = true
-
-		} else {
-			result = false
-		}
-	}
-
-	return result
-
-}
-
-func hexaconvert(n string) string {
-
-	num, err := strconv.ParseInt(n, 16, 64)
-	if err != nil {
-		panic(err)
-	}
-	return fmt.Sprint(num)
-
-}
-func binaryconvert(n string) string {
-
-	num, err := strconv.ParseInt(n, 2, 64)
-	if err != nil {
-		panic(err)
-	}
-	return fmt.Sprint(num)
-
-}
 
 func main() {
 
@@ -126,18 +37,20 @@ func main() {
 	// on the os.File object to close the file
 	file.Close()
 
+	
+
 	t2 := strings.Join(text, "")
 	t3 := strings.Split(t2, " ")
 
 	for i := 0; i < len(t3); i++ {
 		if t3[i] == "(hex)" && i > 0 {
-			t3[i-1] = hexaconvert(t3[i-1])
+			t3[i-1] = tgr.HexaConvert(t3[i-1])
 			t3 = append(t3[:i], t3[i+1:]...)
 			t4 := strings.Join(t3, " ")
 			_ = t4 //omit
 
 		} else if t3[i] == "(bin)" && i > 0 {
-			t3[i-1] = binaryconvert(t3[i-1])
+			t3[i-1] = tgr.BinaryConvert(t3[i-1])
 			t3 = append(t3[:i], t3[i+1:]...)
 			t4 := strings.Join(t3, " ")
 			_ = t4 // omit
@@ -159,13 +72,14 @@ func main() {
 			t3 = append(t3[:i], t3[i+1:]...)
 			t4 := strings.Join(t3, " ")
 			_ = t4 //omit
+			fmt.Printf("%#v\n", t4)
 
-		} else if (t3[i] == "a") && (isvowelh(t3[i+1]) == true) {
+		} else if (t3[i] == "a") && (tgr.IsVowelh(t3[i+1]) == true) {
 			t3[i] = "an"
 			t4 := strings.Join(t3, " ")
 			_ = t4 //omit
 
-		} else if (t3[i] == "A") && (isvowelh(t3[i+1]) == true) {
+		} else if (t3[i] == "A") && (tgr.IsVowelh(t3[i+1]) == true) {
 			t3[i] = "An"
 			t4 := strings.Join(t3, " ")
 			_ = t4 //omit
@@ -173,7 +87,7 @@ func main() {
 		}
 	}
 	// (LOW,UP,CAP [NUMBER])
-	reversed := reverse(t3)
+	reversed := tgr.Reverse(t3)
 	for i := 0; i < len(reversed); i++ {
 		if (reversed[i][0] > '0' && reversed[i][0] <= '9') && reversed[i][len([]rune(reversed[i]))-1] == ')' {
 			n, _ := strconv.Atoi(reversed[i][:1]) //[:1] reads as string , [0] reads as a solitary byte, not wanted
@@ -181,26 +95,26 @@ func main() {
 				for j := 1; j <= n; j++ {
 					reversed[(i+1)+j] = strings.ToUpper(reversed[(i+1)+j])
 				}
-				reform := reverse(reversed)
+				reform := tgr.Reverse(reversed)
 				rejoined := strings.Join(reform, " ")
-				final := removebrackets(rejoined)
+				final := tgr.RemoveBrackets(rejoined)
 				fmt.Println(final)
 
 			} else if strings.Contains(reversed[i+1], "(low") {
 				for j := 1; j <= n; j++ {
 					reversed[(i+1)+j] = strings.ToLower(reversed[(i+1)+j])
 				}
-				reform := reverse(reversed)
+				reform := tgr.Reverse(reversed)
 				rejoined := strings.Join(reform, " ")
-				final := removebrackets(rejoined)
+				final := tgr.RemoveBrackets(rejoined)
 				fmt.Println(final)
 			} else if strings.Contains(reversed[i+1], "(cap") {
 				for j := 1; j <= n; j++ {
 					reversed[(i+1)+j] = strings.Title(reversed[(i+1)+j])
 				}
-				reform := reverse(reversed)
+				reform := tgr.Reverse(reversed)
 				rejoined := strings.Join(reform, " ")
-				final := removebrackets(rejoined)
+				final := tgr.RemoveBrackets(rejoined)
 				_ = final //to omit
 			}
 		}
@@ -209,7 +123,7 @@ func main() {
 	srune := []rune(t2)
 
 	for i := 0; i < len(srune); i++ {
-		if isPunc(string(srune[i])) && srune[i-1] == ' ' {
+		if tgr.IsPunc(string(srune[i])) && srune[i-1] == ' ' {
 			srune[i], srune[i-1] = srune[i-1], srune[i]
 		} else if srune[len(srune)-1] == 39 && srune[len(srune)-2] == ' ' {
 			srune[len(srune)-2], srune[len(srune)-1] = srune[len(srune)-1], srune[len(srune)-2]
