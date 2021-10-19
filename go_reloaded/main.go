@@ -39,52 +39,47 @@ func main() {
 
 	t2 := strings.Join(text, "")
 	t3 := strings.Split(t2, " ")
+	t4 := ""
 
 	for i := 0; i < len(t3); i++ {
+
 		if t3[i] == "(hex)" && i > 0 {
 			t3[i-1] = tgr.HexaConvert(t3[i-1])
 			t3 = append(t3[:i], t3[i+1:]...)
-			t4 := strings.Join(t3, " ")
-			_ = t4 //omit
+			t4 = strings.Join(t3, " ")
 
 		} else if t3[i] == "(bin)" && i > 0 {
 			t3[i-1] = tgr.BinaryConvert(t3[i-1])
 			t3 = append(t3[:i], t3[i+1:]...)
-			t4 := strings.Join(t3, " ")
-			_ = t4 // omit
+			t4 = strings.Join(t3, " ")
 
 		} else if t3[i] == "(up)" && i > 0 {
 			t3[i-1] = strings.ToUpper(t3[i-1])
 			t3 = append(t3[:i], t3[i+1:]...)
-			t4 := strings.Join(t3, " ")
-			_ = t4 // omit
+			t4 = strings.Join(t3, " ")
 
 		} else if t3[i] == "(low)" && i > 0 {
 			t3[i-1] = strings.ToLower(t3[i-1])
 			t3 = append(t3[:i], t3[i+1:]...)
-			t4 := strings.Join(t3, " ")
-			_ = t4 //omit
+			t4 = strings.Join(t3, " ")
 
 		} else if t3[i] == "(cap)" && i > 0 {
 			t3[i-1] = strings.Title(t3[i-1])
 			t3 = append(t3[:i], t3[i+1:]...)
-			t4 := strings.Join(t3, " ")
-			_ = t4 //omit
-			fmt.Printf("%#v\n", t4)
+
+			t4 = strings.Join(t3, " ")
 
 		} else if (t3[i] == "a") && (tgr.IsVowelh(t3[i+1]) == true) {
 			t3[i] = "an"
-			t4 := strings.Join(t3, " ")
-			_ = t4 //omit
+			t4 = strings.Join(t3, " ")
 
 		} else if (t3[i] == "A") && (tgr.IsVowelh(t3[i+1]) == true) {
 			t3[i] = "An"
-			t4 := strings.Join(t3, " ")
-			_ = t4 //omit
-			fmt.Printf("%#v", t4)
+			t4 = strings.Join(t3, " ")
 
 		}
 	}
+
 	// (LOW,UP,CAP [NUMBER])
 	reversed := tgr.Reverse(t3)
 	for i := 0; i < len(reversed); i++ {
@@ -96,8 +91,7 @@ func main() {
 				}
 				reform := tgr.Reverse(reversed)
 				rejoined := strings.Join(reform, " ")
-				final := tgr.RemoveBrackets(rejoined)
-				fmt.Println(final)
+				t4 = tgr.RemoveBrackets(rejoined)
 
 			} else if strings.Contains(reversed[i+1], "(low") {
 				for j := 1; j <= n; j++ {
@@ -105,36 +99,43 @@ func main() {
 				}
 				reform := tgr.Reverse(reversed)
 				rejoined := strings.Join(reform, " ")
-				final := tgr.RemoveBrackets(rejoined)
-				fmt.Println(final)
+				t4 = tgr.RemoveBrackets(rejoined)
+
 			} else if strings.Contains(reversed[i+1], "(cap") {
 				for j := 1; j <= n; j++ {
 					reversed[(i+1)+j] = strings.Title(reversed[(i+1)+j])
 				}
 				reform := tgr.Reverse(reversed)
 				rejoined := strings.Join(reform, " ")
-				final := tgr.RemoveBrackets(rejoined)
-				_ = final //to omit
+				t4 = tgr.RemoveBrackets(rejoined)
 			}
 		}
 	}
+
 	//PUNCTUATION
 	srune := []rune(t2)
 
 	for i := 0; i < len(srune); i++ {
 		if tgr.IsPunc(string(srune[i])) && srune[i-1] == ' ' {
 			srune[i], srune[i-1] = srune[i-1], srune[i]
+			a2 := string(srune)
+			t2unspaced := strings.ReplaceAll(a2, "  ", " ")
+			t4 = strings.TrimSpace(t2unspaced)
+
 		} else if srune[len(srune)-1] == 39 && srune[len(srune)-2] == ' ' {
 			srune[len(srune)-2], srune[len(srune)-1] = srune[len(srune)-1], srune[len(srune)-2]
+			a2 := string(srune)
+			t2unspaced := strings.ReplaceAll(a2, "  ", " ")
+			t4 = strings.TrimSpace(t2unspaced)
+
 		} else if srune[i] == 39 && srune[i-1] == ' ' && srune[i+1] == ' ' {
 			srune[i], srune[i+1] = srune[i+1], srune[i]
+			a2 := string(srune)
+			t2unspaced := strings.ReplaceAll(a2, "  ", " ")
+			t4 = strings.TrimSpace(t2unspaced)
 		}
 
 	}
-	// t2 = string(srune)
-	// fmt.Printf("%#v\n", t2)
-	// t2unspaced := strings.ReplaceAll(t2, "  ", " ")
-	//  //final := strings.TrimSpace(t2unspaced)
-	//  fmt.Printf("%#v", t4)
+	fmt.Printf("\n%s\n", t4)
 
 }
