@@ -81,6 +81,7 @@ func main() {
 			t3[i] = "An"
 			t4 := strings.Join(t3, " ")
 			_ = t4 //omit
+			fmt.Printf("%#v", t4)
 
 		}
 	}
@@ -130,10 +131,10 @@ func main() {
 		}
 
 	}
-	t2 = string(srune)
-	fmt.Printf("%#v\n", t2)
-	t2unspaced := strings.ReplaceAll(t2, "  ", " ")
-	final := strings.TrimSpace(t2unspaced)
-	fmt.Printf("%#v", final)
+	// t2 = string(srune)
+	// fmt.Printf("%#v\n", t2)
+	// t2unspaced := strings.ReplaceAll(t2, "  ", " ")
+	//  //final := strings.TrimSpace(t2unspaced)
+	//  fmt.Printf("%#v", t4)
 
 }
