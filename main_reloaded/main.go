@@ -11,6 +11,10 @@ import (
 )
 
 func main() {
+	GoReloaded()
+}
+
+func GoReloaded() {
 
 	file, err := os.Open("test.txt") //os.Open opens file in read only mode
 	if err != nil {
@@ -79,8 +83,11 @@ func main() {
 		}
 	}
 
+	fmt.Printf("%#v", t3)
 	// (LOW,UP,CAP [NUMBER])
 	reversed := tgr.Reverse(t3)
+	fmt.Printf("%#v", reversed) //delete
+
 	for i := 0; i < len(reversed); i++ {
 		if (reversed[i][0] > '0' && reversed[i][0] <= '9') && reversed[i][len([]rune(reversed[i]))-1] == ')' {
 			n, _ := strconv.Atoi(reversed[i][:1]) //[:1] reads as string , [0] reads as a solitary byte, not wanted
@@ -113,8 +120,8 @@ func main() {
 
 	//PUNCTUATION
 
-	t2 = strings.Join(t3, " ")
-	srune := []rune(t2)
+	//t2 = strings.Join(t3, " ")
+	srune := []rune(t4)
 	a2 := ""
 
 	for i := 0; i < len(srune); i++ {
@@ -133,7 +140,6 @@ func main() {
 		} else if srune[i] == 39 && srune[i-1] == ' ' && srune[i+1] == ' ' {
 			srune[i], srune[i+1] = srune[i+1], srune[i]
 			a2 = string(srune)
-			fmt.Println(a2)
 			t2unspaced := strings.ReplaceAll(a2, "  ", " ")
 			t4 = strings.TrimSpace(t2unspaced)
 
@@ -147,7 +153,7 @@ func main() {
 
 	}
 	// Opening the file for writing
-	file, err = os.OpenFile("output.txt", os.O_WRONLY, 0644)
+	file, err = os.OpenFile("output.txt", os.O_WRONLY|os.O_TRUNC, 0644)
 
 	// error handling
 	if err != nil {
