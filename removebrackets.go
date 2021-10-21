@@ -10,6 +10,7 @@ func RemoveBrackets(n string) string {
 			opening = index
 		} else if char == ')' {
 			closing = index + 1
+
 		}
 	}
 

@@ -43,6 +43,7 @@ func GoReloaded() {
 
 	t2 := strings.Join(text, "")
 	t3 := strings.Split(t2, " ")
+
 	t4 := ""
 
 	for i := 0; i < len(t3); i++ {
@@ -83,10 +84,10 @@ func GoReloaded() {
 		}
 	}
 
-	fmt.Printf("%#v", t3)
 	// (LOW,UP,CAP [NUMBER])
-	reversed := tgr.Reverse(t3)
-	fmt.Printf("%#v", reversed) //delete
+
+	t5 := strings.Split(t4, " ")
+	reversed := tgr.Reverse(t5)
 
 	for i := 0; i < len(reversed); i++ {
 		if (reversed[i][0] > '0' && reversed[i][0] <= '9') && reversed[i][len([]rune(reversed[i]))-1] == ')' {
@@ -95,31 +96,31 @@ func GoReloaded() {
 				for j := 1; j <= n; j++ {
 					reversed[(i+1)+j] = strings.ToUpper(reversed[(i+1)+j])
 				}
-				reform := tgr.Reverse(reversed)
-				rejoined := strings.Join(reform, " ")
-				t4 = tgr.RemoveBrackets(rejoined)
 
-			} else if strings.Contains(reversed[i+1], "(low") {
+			}
+			if strings.Contains(reversed[i+1], "(low") {
 				for j := 1; j <= n; j++ {
 					reversed[(i+1)+j] = strings.ToLower(reversed[(i+1)+j])
 				}
-				reform := tgr.Reverse(reversed)
-				rejoined := strings.Join(reform, " ")
-				t4 = tgr.RemoveBrackets(rejoined)
-
-			} else if strings.Contains(reversed[i+1], "(cap") {
+			}
+			if strings.Contains(reversed[i+1], "(cap") {
 				for j := 1; j <= n; j++ {
 					reversed[(i+1)+j] = strings.Title(reversed[(i+1)+j])
 				}
-				reform := tgr.Reverse(reversed)
-				rejoined := strings.Join(reform, " ")
-				t4 = tgr.RemoveBrackets(rejoined)
+
 			}
 		}
+
 	}
 
-	//PUNCTUATION
+	reform := tgr.Reverse(reversed)
+	rejoined := strings.Join(reform, " ")
+	// a4 := tgr.RemoveBrackets(rejoined)
+	fmt.Println(rejoined)
+	t4 = tgr.RemoveBrackets(rejoined)
+	fmt.Println(t4)
 
+	//PUNCTUATION
 	//t2 = strings.Join(t3, " ")
 	srune := []rune(t4)
 	a2 := ""
