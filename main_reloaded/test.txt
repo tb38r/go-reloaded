@@ -1,1 +1,0 @@
-This is a (cap, 2) string
