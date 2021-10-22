@@ -25,7 +25,7 @@ func TrimAtoi(s string) int {
 	return trim
 }
 
-func HexNumbered(s []string) []string {
+func hexnumbered(s []string) []string {
 
 	pd := 0
 	var empty []string
