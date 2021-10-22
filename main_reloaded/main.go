@@ -12,9 +12,11 @@ func main() {
 
 	file_input := arguments[1]
 	file := tgr.ReadFile(file_input)
-	filesplit := strings.Split(file, " ")    //returns slice of strings
-	filehexa := tgr.HexaConvert(filesplit)   //basic (cap/bin/hex...) fixed
-	filehexanumb := 
-	_ = filecapped                           // to delete
+	filesplit := strings.Split(file, " ")  //returns slice of strings
+	filehexa := tgr.HexaConvert(filesplit) //basic (cap/bin/hex...) fixed
+	filehexanumb := tgr.Hexnumbered(filehexa)
+	_ = filehexanumb // to delete
+
+	fmt.Println(file)
 
 }
