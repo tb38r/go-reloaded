@@ -14,8 +14,9 @@ func HexaConvert(n []string) []string {
 		if n[i] == "(hex)" { //if "(hex)" is found
 			num, _ := strconv.ParseInt(n[i-1], 16, 64) //fix preceeding value
 			empty[len(empty)-1] = fmt.Sprint(num)
-
+			
 		}
+		
 
 		if n[i] == "(bin)" {
 			num, _ := strconv.ParseInt(n[i-1], 2, 64)

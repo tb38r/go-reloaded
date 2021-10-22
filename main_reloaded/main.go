@@ -14,8 +14,7 @@ func main() {
 	file := tgr.ReadFile(file_input)
 	filesplit := strings.Split(file, " ")    //returns slice of strings
 	filecapped := tgr.HexaConvert(filesplit) //basic (cap/bin/hex...) fixed
+	_ = filecapped                           // to delete
 
-
-	
-
+	fmt.Println(tgr.HexNumbered(filesplit))
 }

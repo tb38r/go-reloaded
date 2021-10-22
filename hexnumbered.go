@@ -1,16 +1,75 @@
 package tgr
 
-func BasicAtoi2(s string) int {
-	srune := []rune(s)
-	x := 0
+import (
+	"fmt"
+	"strings"
+)
 
-	for i := 0; i < len(srune); i++ {
-		if srune[i] >= '0' && srune[i] <= '9' {
-			x = x * 10
-			x = x + int(srune[i]) - 48
-		} else {
-			return 0
+func TrimAtoi(s string) int {
+	neg := false       // intialise neg as false
+	slice := []rune(s) // slice string into a rune to manipulate it
+	trim := 0          // initialise trim as 0
+	for i := 0; i < len(slice); i++ {
+
+		if !neg && trim == 0 && slice[i] == '-' {
+			neg = true
+		}
+		if slice[i] >= '0' && slice[i] <= '9' {
+			trim *= 10
+			trim += int(slice[i] - 48)
 		}
 	}
-	return x
+	if neg {
+		return trim * -1
+	}
+	return trim
+}
+
+func HexNumbered(s []string) []string {
+
+	pd := 0
+	var empty []string
+
+	for i := 0; i < len(s); i++ {
+
+		if s[i] == "(up," {
+			pd = TrimAtoi(s[i+1])
+
+			for j := 1; j <= pd; j++ {
+				empty[i-j] = strings.ToUpper(empty[i-j])
+				fmt.Println("\n", s[i-j])
+
+			}
+
+		}
+
+		if s[i] == "(low," {
+			pd = TrimAtoi(s[i+1])
+
+			for j := 1; j <= pd; j++ {
+				empty[i-j] = strings.ToLower(empty[i-j])
+				fmt.Println("\n", s[i-j])
+
+			}
+
+		}
+
+		if s[i] == "(cap," {
+			pd = TrimAtoi(s[i+1])
+
+			for j := 1; j <= pd; j++ {
+				empty[i-j] = strings.Title(empty[i-j])
+				fmt.Println("\n", s[i-j])
+
+			}
+
+		}
+
+		if s[i] != "(up" && s[i] != "(low" && s[i] != "(cap" {
+			empty = append(empty, s[i])
+		}
+
+	}
+	return empty
+
 }
