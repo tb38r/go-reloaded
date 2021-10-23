@@ -1,11 +1,10 @@
 package tgr
 
 import (
-	"fmt"
 	"strings"
 )
 
-func hexnumbered(s []string) []string {
+func Hexnumbered(s []string) []string {
 
 	pd := 0
 	var empty []string
@@ -17,7 +16,6 @@ func hexnumbered(s []string) []string {
 
 			for j := 1; j <= pd; j++ {
 				empty[i-j] = strings.ToUpper(empty[i-j])
-				fmt.Println("\n", s[i-j])
 
 			}
 
@@ -28,7 +26,6 @@ func hexnumbered(s []string) []string {
 
 			for j := 1; j <= pd; j++ {
 				empty[i-j] = strings.ToLower(empty[i-j])
-				fmt.Println("\n", s[i-j])
 
 			}
 
@@ -39,7 +36,6 @@ func hexnumbered(s []string) []string {
 
 			for j := 1; j <= pd; j++ {
 				empty[i-j] = strings.Title(empty[i-j])
-				fmt.Println("\n", s[i-j])
 
 			}
 

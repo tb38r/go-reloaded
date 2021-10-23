@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 	"strings"
 	"tgr"
@@ -17,6 +16,6 @@ func main() {
 	filehexanumb := tgr.Hexnumbered(filehexa)
 	_ = filehexanumb // to delete
 
-	fmt.Println(file)
+	//fmt.Println("\n", filehexanumb)
 
 }
