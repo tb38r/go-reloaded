@@ -1,14 +1,14 @@
 package tgr
 
-func IsPunc(category string) bool {
+func IsPunc(category rune) bool {
 	switch category {
 	case
-		".",
-		",",
-		"!",
-		":",
-		";",
-		"?":
+		'.',
+		',',
+		'!',
+		':',
+		';',
+		'?':
 		return true
 	}
 	return false
