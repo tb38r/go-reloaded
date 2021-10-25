@@ -14,12 +14,12 @@ func Punctone(n []string) string {
 
 	//fmt.Println("\n This is nrune", nrune)
 
-	for i := 0; i < len(nrune)-1; i++ {
+	for i := 0; i < len(nrune); i++ {
 
 		if IsPunc(nrune[i]) && nrune[i-1] == 32 {
 			nrune[i], nrune[i-1] = nrune[i-1], nrune[i]
 
 		}
 	}
-	return string(nrune)
+	return StandardizeSpaces(string(nrune))
 }
