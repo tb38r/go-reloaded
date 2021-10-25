@@ -16,7 +16,8 @@ func main() {
 	filehexa := tgr.HexaConvert(filesplit) //basic (cap/bin/hex...) fixed
 	filehexanumb := tgr.Hexnumbered(filehexa)
 	filepunctone := tgr.Punctone(filehexanumb) // to delete
+	filepuncttwo := tgr.Puncttwo(filepunctone)
 
-	fmt.Printf("\n %v", filepunctone)
+	fmt.Printf("\nFINAL OUTPUT : %v", filepuncttwo)
 
 }
