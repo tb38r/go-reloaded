@@ -24,9 +24,9 @@ func main() {
 		panic(man)
 	}
 	// fmt.Printf("\nFINAL OUTPUT : %v", filehexa)
-	fmt.Printf("\nFINAL OUTPUT : %v", filehexanumb)
-	fmt.Printf("\nFINAL OUTPUT : %v", filepunctone)
-	fmt.Printf("\nFINAL OUTPUT : %v", filepuncttwo)
+	// fmt.Printf("\nFINAL OUTPUT : %v", filehexanumb)
+	// fmt.Printf("\nFINAL OUTPUT : %v", filepunctone)
+	// fmt.Printf("\nFINAL OUTPUT : %v", filepuncttwo)
 	fmt.Printf("\nFINAL OUTPUT : %v", fileatoan)
 
 }
